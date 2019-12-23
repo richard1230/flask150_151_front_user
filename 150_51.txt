@@ -1,0 +1,44 @@
+(my_env) $python3 manage.py db migrate
+INFO  [alembic.runtime.migration] Context impl MySQLImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.autogenerate.compare] Detected added table 'front_user'
+  Generating /Users/mac/PycharmProjects/bbc/migrations/versions/d002dfa15693_.py ...  done
+(my_env) $python3 manage.py db upgrade
+INFO  [alembic.runtime.migration] Context impl MySQLImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade 725375213f6e -> d002dfa15693, empty message
+(my_env) $
+
+------------------=========================
+
+mysql> show tables;
++-----------------+
+| Tables_in_zlbbs |
++-----------------+
+| alembic_version |
+| cms_role        |
+| cms_role_user   |
+| cms_user        |
+| front_user      |
++-----------------+
+5 rows in set (0.00 sec
+增加了front_user
+
+
+
+------------------=========================
+------------------=========================
+
+(my_env) $python3 manage.py create_front_user -t 18888888888 -u zhiliao -p 111111
+(my_env) $
+
+------------------=========================
+mysql> select * from front_user;
++------------------------+-------------+----------+------------------------------------------------------------------------------------------------+-------+----------+--------+-----------+--------+---------------------+
+| id                     | telephone   | username | _password                                                                                      | email | realname | avatar | signature | gender | join_time           |
++------------------------+-------------+----------+------------------------------------------------------------------------------------------------+-------+----------+--------+-----------+--------+---------------------+
+| SVQYeZNhPtTg2HdMJVgLyR | 18888888888 | zhiliao  | pbkdf2:sha256:150000$MGy0EntI$90f5e782dd8ef04c6e9f1511d0ff0fe0c57811fc5d0b9e1f0582b2c68f236440 | NULL  | NULL     | NULL   | NULL      | UNKNOW | 2019-12-23 18:41:50 |
++------------------------+-------------+----------+------------------------------------------------------------------------------------------------+-------+----------+--------+-----------+--------+---------------------+
+1 row in set (0.00 sec)
+
+
